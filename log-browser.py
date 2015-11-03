@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 
 logs = 'logs.db'
-
+file = 'logs.txt'
 db = sql.connect(logs)
 
 with db:

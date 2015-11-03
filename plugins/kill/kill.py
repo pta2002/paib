@@ -1,6 +1,6 @@
 import plugins.pluginapi
 
-
+# This is an example plugin. Feel free to remove it! :)
 class Plugin(plugins.pluginapi.BasicPlugin):
     def __init__(self, bot, config):
         name = 'kill'

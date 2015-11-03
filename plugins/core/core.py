@@ -23,4 +23,4 @@ class Plugin(plugins.pluginapi.BasicPlugin):
 
     def help(self, usr, cmd):
         for plugin in self.bot.plugins:
-            self.send_msg("%s - %s" % (plugin.name, plugin.description), self.channel)
+            self.send_msg("%s - %s" % (plugin.name, plugin.description), usr)
