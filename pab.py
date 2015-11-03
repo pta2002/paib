@@ -21,12 +21,17 @@ class Pab(irc.bot.SingleServerIRCBot):
 
     def on_nicknameinuse(self, c, e):
         c.nick(c.get_nickname() + "_")
+        for plugin in self.plugins:
+            plugin.on_nicknameinuse(c.get_nickname())
 
     def on_welcome(self, c, e):
         c.join(self.channel)
+        for plugin in self.plugins:
+            plugin.on_welcome(c.get_nickname())
 
     def on_privmsg(self, c, e):
-        pass
+        for plugin in self.plugins:
+            plugin.on_message(e.source.nick)
 
     def on_join(self, c, e):
         for plugin in self.plugins:

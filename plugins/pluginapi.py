@@ -14,6 +14,12 @@ class BasicPlugin(object):
     def on_message(self, msg, user):
         pass
 
+    def on_welcome(self, user):
+        pass
+    
+    def on_nicknameinuse(self, nickname):
+        pass
+    
     def on_command(self, cmd, user):
         for command in self.commands:
             if command.name == cmd.split(" ")[0]:
