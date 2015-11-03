@@ -3,7 +3,7 @@
     "server": "irc.afternet.org",
     "port": 6667,
     "nick": "paib",
-    "channel": "#paib"
+    "channel": "#ludumdare"
   },
 
   "botsettings": {
