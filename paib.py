@@ -30,8 +30,7 @@ class Pab(irc.bot.SingleServerIRCBot):
             plugin.on_welcome(c.get_nickname())
 
     def on_privmsg(self, c, e):
-        for plugin in self.plugins:
-            plugin.on_message(e.source.nick)
+        pass
 
     def on_join(self, c, e):
         for plugin in self.plugins:
