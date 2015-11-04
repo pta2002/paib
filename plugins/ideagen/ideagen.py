@@ -13,5 +13,14 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         
 
     def cmd_idea(self, usr, cmd):
-        self.send_msg("Make a %s %s %s!" % (random.choice(self.data["list1"]).lower(), random.choice(self.data["list2"]).lower(),
-                                            random.choice(self.data["list3"]).lower()), self.channel)
+        choice1 = random.choice(self.data["list1"]).lower()
+        choice2 = random.choice(self.data["list2"]).lower()
+        choice3 = random.choice(self.data["list3"]).lower()
+        
+        self.send_msg("Make a%s %s %s %s!" % (self.add_n(choice1), choice1, choice2, choice3), self.channel)
+    
+    def add_n(self, text):
+        if text[0].lower() == "a" or text[0].lower() == "e" or text[0].lower() == "i" or text[0].lower() == "o" or text[0].lower() == "u":
+            return 'n'
+        else:
+            return ''
