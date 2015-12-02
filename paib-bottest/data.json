@@ -74,8 +74,7 @@
             "Physics based",
             "Post-apocalyptic",
             "Time limited",
-            "Tile based",
-            "straight-edge"
+            "Tile based"
         ],
         "list2": [
             "platformer",
@@ -102,7 +101,6 @@
             "action RPG",
             "tactical RPG",
             "RTS game",
-            "farm simulator",
             "tower defense",
             "4X game",
             "turn based game",
@@ -129,8 +127,7 @@
             "roguelike",
             "puzzle platformer",
             "brown shooter",
-            "game",
-            "roguelike "
+            "game"
         ],
         "list3": [
             "with a fixed camera",
@@ -262,8 +259,7 @@
             "with combos",
             "with a countdown timer",
             "with infinite gameplay",
-            "where all levels form one long corridor",
-            "set in a shakesperean play"
+            "where all levels form one long corridor"
         ],
         "suggestions": {
             "part1": [],

@@ -2,8 +2,8 @@
   "connection": {
     "server": "irc.afternet.org",
     "port": 6667,
-    "nick": "paib",
-    "channel": "#ludumdare"
+    "nick": "paib2",
+    "channel": "#bottest"
   },
 
   "botsettings": {

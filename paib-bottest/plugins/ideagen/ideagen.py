@@ -28,15 +28,15 @@ class Plugin(plugins.pluginapi.BasicPlugin):
             for idea in range(len(ideas)):
                 if ideas[idea].strip() != '':
                     self.submit_idea(ideas[idea], idea+1)
-            self.send_msg('Your idea was successfully submitted. It will be reviewed and may soon be in the bot!', self.channel)
     
     def submit_idea(self, idea, part):
         try:
             data = json.loads(open(self.dataFile).read())
             data["idea-generator"]["suggestions"]["part" + str(part)].append(idea)
             open(self.dataFile, 'w').write(json.dumps(data, sort_keys=True, indent=4))
+            self.send_msg('Your idea was successfully submitted. It will be reviewed and may soon be in the bot!', self.channel)
         except:
-            pass
+            self.send_msg('There was an error submitting your idea. Please try again later!', self.channel)
     
     def add_n(self, text):
         if text[0].lower() == "a" or text[0].lower() == "e" or text[0].lower() == "i" or text[0].lower() == "o" or text[0].lower() == "u":
