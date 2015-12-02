@@ -2,6 +2,7 @@ import json
 import sys, os, imp
 
 import irc.bot
+import irc.client
 import irc.strings
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
@@ -14,6 +15,8 @@ class Pab(irc.bot.SingleServerIRCBot):
                                             config["connection"]["nick"], config["connection"]["nick"])
         self.channel = config["connection"]["channel"]
         self.command_prefix = config["botsettings"]["command_prefix"]
+	
+        irc.client.ServerConnection.buffer_class.errors = 'replace'
 
         self.plugins = []
 
