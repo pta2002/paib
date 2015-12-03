@@ -321,31 +321,11 @@
             "submitter": "nander"
         },
         {
-            "joke": "$reload",
-            "submitter": "rnlf"
-        },
-        {
-            "joke": "$joke hey",
-            "submitter": "rnlf"
-        },
-        {
             "joke": "$guess 125",
             "submitter": "nander"
         },
         {
             "joke": "rnlf is funny",
-            "submitter": "nander"
-        },
-        {
-            "joke": "\"; delete from jokes;",
-            "submitter": "rnlf"
-        },
-        {
-            "joke": "'}",
-            "submitter": "rnlf"
-        },
-        {
-            "joke": "$empty_object = (Object) null;",
             "submitter": "nander"
         },
         {
