@@ -13,6 +13,7 @@ This should get you running
 
 # Changing the config
 As of now, PAIB only runs in a single channel. This is how config.json would look like for #paib on irc.afternet.org (port 6667):
+
       {
         "connection": {
           "server": "irc.afternet.org",
