@@ -13,23 +13,23 @@ This should get you running
 
 # Changing the config
 As of now, PAIB only runs in a single channel. This is how config.json would look like for #paib on irc.afternet.org (port 6667):
-  {
-    "connection": {
-      "server": "irc.afternet.org",
-      "port": 6667,
-      "nick": "paib",
-      "channel": "#paib"
-    },
-  
-    "botsettings": {
-      "command_prefix": "$",
-      "plugins_folder": "plugins",
-      "ignored": ["bot1", "bot2"]
-    },
-  
-    "admin": {
-      "admins": ["example"]
-    }
-  }
+      {
+        "connection": {
+          "server": "irc.afternet.org",
+          "port": 6667,
+          "nick": "paib",
+          "channel": "#paib"
+        },
+      
+        "botsettings": {
+          "command_prefix": "$",
+          "plugins_folder": "plugins",
+          "ignored": ["bot1", "bot2"]
+        },
+      
+        "admin": {
+          "admins": ["example"]
+        }
+      }
 
 The settings on the config file are meant for #ludumdare, where I (pta2002) am the paib admin and where yaib and lunabot are two other bots that we should ignore.
