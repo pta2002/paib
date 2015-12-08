@@ -14,5 +14,5 @@ class Plugin(plugins.pluginapi.BasicPlugin):
             "Thanks!",
         ]
 
-    def cmd_botsnack(self, usr, cmd):
-        self.send_msg(random.choice(self.botsnack_messages), self.channel)
+    def cmd_botsnack(self, usr, cmd, chan):
+        self.send_msg(random.choice(self.botsnack_messages), chan)

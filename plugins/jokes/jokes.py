@@ -9,16 +9,16 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         plugins.pluginapi.BasicPlugin.__init__(self, name, desc, config, bot.connection)
         self.register_command('joke', self.cmd_joke)
 
-    def cmd_joke(self, usr, cmd):
+    def cmd_joke(self, usr, cmd, chan):
         jokesFile = open('data.json')
         jokes = json.loads(jokesFile.read())
         jokesFile.close()
         if len(cmd) == 1:
             try:
                 chosen_joke = random.choice(jokes["jokes"])
-                self.send_msg("\"%s\" (submitted by %s)" % (chosen_joke["joke"], chosen_joke["submitter"]), self.channel)
+                self.send_msg("\"%s\" (submitted by %s)" % (chosen_joke["joke"], chosen_joke["submitter"]), chan)
             except:
-                self.send_msg("There are no jokes! Submit one yourself!", self.channel)
+                self.send_msg("There are no jokes! Submit one yourself!", chan)
         else:
             joke = " ".join(cmd[1:])
             self.submit_joke(joke, usr)
@@ -32,4 +32,4 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         jokesFile = open('data.json', 'w')
         jokesFile.write(json.dumps(jokes, sort_keys=True, indent=4))
         jokesFile.close()
-        self.send_msg("%s: Successfully submitted joke!" % usr, self.channel)
+        self.send_msg("%s: Successfully submitted joke!" % usr, chan)

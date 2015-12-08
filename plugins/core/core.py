@@ -10,7 +10,7 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         self.register_command('reload', self.reload)
         self.register_command('help', self.help)
 
-    def reload(self, usr, cmd):
+    def reload(self, usr, cmd, chan):
         if usr in self.config["admin"]["admins"]:
             try:
                 self.bot.plugins = []
@@ -21,6 +21,6 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         else:
             self.send_msg("Insufficient permissions.", usr)
 
-    def help(self, usr, cmd):
+    def help(self, usr, cmd, chan):
         for plugin in self.bot.plugins:
             self.send_msg("%s - %s" % (plugin.name, plugin.description), usr)

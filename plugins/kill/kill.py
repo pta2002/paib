@@ -9,8 +9,8 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         self.register_command('kill', self.cmd_kill)
         
 
-    def cmd_kill(self, usr, cmd):
+    def cmd_kill(self, usr, cmd, chan):
         if len(cmd) > 1:
-            self.send_msg("*kills %s*" % cmd[1], self.channel)
+            self.send_msg("*kills %s*" % cmd[1], chan)
         else:
-            self.send_msg("*kills %s*" % usr, self.channel)
+            self.send_msg("*kills %s*" % usr, chan)

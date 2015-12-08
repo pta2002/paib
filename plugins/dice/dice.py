@@ -10,7 +10,7 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         self.register_command('coin', self.cmd_coin)
         self.find_dice_notation = re.compile('(\d+)d(\d+)')
     
-    def cmd_dice(self, usr, cmd):
+    def cmd_dice(self, usr, cmd, chan):
         dice_num = 1
         dice_faces = 6
         results = []
@@ -28,10 +28,10 @@ class Plugin(plugins.pluginapi.BasicPlugin):
                 results.append(str(result))
                 total += result
             
-            self.send_msg('%s rolled %s for a total of %s!' % (usr, ", ".join(results), str(total)), self.channel)
+            self.send_msg('%s rolled %s for a total of %s!' % (usr, ", ".join(results), str(total)), chan)
         except:
-            self.send_msg('Please use dice notation!', self.channel)
+            self.send_msg('Please use dice notation!', chan)
     
-    def cmd_coin(self, usr, cmd):
+    def cmd_coin(self, usr, cmd, chan):
         options = ['heads', 'tails']
-        self.send_msg('%s flipped %s!' % (usr, random.choice(options)), self.channel)
+        self.send_msg('%s flipped %s!' % (usr, random.choice(options)), chan)

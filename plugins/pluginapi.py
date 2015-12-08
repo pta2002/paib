@@ -8,10 +8,9 @@ class BasicPlugin(object):
         self.description = desc
         self.commands = []
         self.config = config
-        self.channel = self.config["connection"]["channel"]
         self.connection = connection
 
-    def on_message(self, msg, user):
+    def on_message(self, msg, user, chan):
         pass
 
     def on_welcome(self, user):
@@ -20,10 +19,10 @@ class BasicPlugin(object):
     def on_nicknameinuse(self, nickname):
         pass
     
-    def on_command(self, cmd, user):
+    def on_command(self, cmd, user, chan):
         for command in self.commands:
             if command.name == cmd.split(" ")[0]:
-                command.action(user, cmd.split(" "))
+                command.action(user, cmd.split(" "), chan)
 
     def send_msg(self, msg, chan):
         c = self.connection
@@ -33,10 +32,10 @@ class BasicPlugin(object):
         c = self.connection
         c.notice(user, msg)
 
-    def on_userjoin(self, usr):
+    def on_userjoin(self, usr, chan):
         pass
 
-    def on_userquit(self, usr):
+    def on_userquit(self, usr, chan):
         pass
 
     def register_command(self, name, action):

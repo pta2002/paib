@@ -13,26 +13,26 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         self.register_command('submitidea', self.cmd_submitidea)
         
 
-    def cmd_idea(self, usr, cmd):
+    def cmd_idea(self, usr, cmd, chan):
         self.data = json.loads(open(self.dataFile).read())["idea-generator"]
         choice1 = random.choice(self.data["list1"]).lower()
         choice2 = random.choice(self.data["list2"]).lower()
         choice3 = random.choice(self.data["list3"]).lower()
         
-        self.send_msg("Make a%s %s %s %s!" % (self.add_n(choice1), choice1, choice2, choice3), self.channel)
+        self.send_msg("Make a%s %s %s %s!" % (self.add_n(choice1), choice1, choice2, choice3), chan)
     
-    def cmd_name(self, usr, cmd):
-        self.send_msg(self.gen_name(), self.channel)
+    def cmd_name(self, usr, cmd, chan):
+        self.send_msg(self.gen_name(), chan)
     
-    def cmd_submitidea(self, usr, cmd):
+    def cmd_submitidea(self, usr, cmd, chan):
         ideas = ' '.join(cmd[1:]).split('/')
         if len(ideas) != 3:
-            self.send_msg('Please submit 3 ideas, one for each part, separated by slashes (/)', self.channel)
+            self.send_msg('Please submit 3 ideas, one for each part, separated by slashes (/)', chan)
         else:
             for idea in range(len(ideas)):
                 if ideas[idea].strip() != '':
                     self.submit_idea(ideas[idea], idea+1)
-            self.send_msg('Your idea was successfully submitted. It will be reviewed and may soon be in the bot!', self.channel)
+            self.send_msg('Your idea was successfully submitted. It will be reviewed and may soon be in the bot!', chan)
     
     def submit_idea(self, idea, part):
         try:

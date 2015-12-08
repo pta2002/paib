@@ -8,12 +8,12 @@ import irc.strings
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
-class Pab(irc.bot.SingleServerIRCBot):
+class Paib(irc.bot.SingleServerIRCBot):
     def __init__(self, config):
         self.config = config
         irc.bot.SingleServerIRCBot.__init__(self, [(config["connection"]["server"], config["connection"]["port"])],
                                             config["connection"]["nick"], config["connection"]["nick"])
-        self.channel = config["connection"]["channel"]
+        self.channels_to_join = config["connection"]["channels"]
         self.command_prefix = config["botsettings"]["command_prefix"]
 	
         irc.client.ServerConnection.buffer_class.errors = 'replace'
@@ -28,37 +28,40 @@ class Pab(irc.bot.SingleServerIRCBot):
             plugin.on_nicknameinuse(c.get_nickname())
 
     def on_welcome(self, c, e):
-        c.join(self.channel)
+        for channel in self.channels_to_join:
+            c.join(channel)
         for plugin in self.plugins:
             plugin.on_welcome(c.get_nickname())
 
     def on_privmsg(self, c, e):
-        pass
+        a = e.arguments[0].split(self.command_prefix, 1)
+        if len(a) > 1:
+            self.do_command(e, a[1].strip(), e.target)
 
     def on_join(self, c, e):
         for plugin in self.plugins:
-            plugin.on_userjoin(e.source.nick)
+            plugin.on_userjoin(e.source.nick, e.target)
 
-    def on_disconnect(self, c, e):
+    def on_quit(self, c, e):
         for plugin in self.plugins:
-            pass
-            #plugin.on_userquit(e.source.nick)
+            plugin.on_userquit(e.source.nick, e.target)
 
     def on_pubmsg(self, c, e):
         if not (e.source.nick in self.config["botsettings"]["ignored"]):
             a = e.arguments[0].split(self.command_prefix, 1)
             if len(a) > 1:
-                self.do_command(e, a[1].strip())
+                self.do_command(e, a[1].strip(), e.target)
             
             for plugin in self.plugins:
-                plugin.on_message(e.arguments[0], e.source.nick)
+                plugin.on_message(e.arguments[0], e.source.nick, e.target)
+        print("(%s) <%s> %s" % (e.target, e.source.nick, e.arguments[0]))
 
-    def do_command(self, e, cmd):
+    def do_command(self, e, cmd, chan):
         nick = e.source.nick
         c = self.connection
 
         for plugin in self.plugins:
-            plugin.on_command(cmd, nick)
+            plugin.on_command(cmd, nick, chan)
 
     def load_plugins(self, plugins):
         print("Loading plugins")
@@ -107,9 +110,9 @@ def main():
         print("Could not open the config. Quitting.")
         sys.exit(1)
 
-    pab = Pab(settings)
+    paib = Paib(settings)
 
-    pab.start()
+    paib.start()
 
 if __name__ == "__main__":
     main()
