@@ -1,5 +1,5 @@
 import plugins.pluginapi
-import random, json
+import random, json, urllib.request, locale
 
 
 class Plugin(plugins.pluginapi.BasicPlugin):
@@ -9,6 +9,7 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         self.dataFile = "data.json"
         plugins.pluginapi.BasicPlugin.__init__(self, name, desc, config, bot.connection)
         self.register_command('idea', self.cmd_idea)
+        self.register_command('name', self.cmd_name)
         self.register_command('submitidea', self.cmd_submitidea)
         
 
@@ -19,6 +20,9 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         choice3 = random.choice(self.data["list3"]).lower()
         
         self.send_msg("Make a%s %s %s %s!" % (self.add_n(choice1), choice1, choice2, choice3), self.channel)
+    
+    def cmd_name(self, usr, cmd):
+        self.send_msg(self.gen_name(), self.channel)
     
     def cmd_submitidea(self, usr, cmd):
         ideas = ' '.join(cmd[1:]).split('/')
@@ -43,3 +47,48 @@ class Plugin(plugins.pluginapi.BasicPlugin):
             return 'n'
         else:
             return ''
+    
+    def gen_name(self, fil='https://videogamena.me/video_game_names.txt'):
+        name_file = urllib.request.urlopen("http://videogamena.me/video_game_names.txt")
+        encoding = locale.getdefaultlocale()[1]
+        
+        ideas = []
+        similar = {}
+        
+        tmp = []
+        for x in name_file.read().decode(encoding).split("----"):
+            for y in x.split("\n"):
+                i = y.split("^")
+                if len(i) > 1:
+                    j = i[1].split('|')
+                    similar[i[0]] = j
+                    tmp.append(i[0])
+                elif y != '':
+                    tmp.append(y)
+            ideas.append(tmp)
+            tmp = []
+            
+        name = []
+        
+        name.append(random.choice(ideas[0]))
+        if name[0] in similar:
+            for x in similar[name[0]]:
+                for idea_list in range(len(ideas)):
+                    if x in ideas[idea_list]:
+                        ideas[idea_list].remove(x)
+                        
+        name.append(random.choice(ideas[1]))
+        if name[1] in similar:
+            for x in similar[name[1]]:
+                for idea_list in range(len(ideas)):
+                    if x in ideas[idea_list]:
+                        ideas[idea_list].remove(x)
+        
+        name.append(random.choice(ideas[1]))
+        if name[1] in similar:
+            for x in similar[name[1]]:
+                for idea_list in range(len(ideas)):
+                    if x in ideas[idea_list]:
+                        ideas[idea_list].remove(x)
+        
+        return "\"%s %s %s\"" % (name[0], name[1], name[2])

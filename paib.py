@@ -41,7 +41,8 @@ class Pab(irc.bot.SingleServerIRCBot):
 
     def on_disconnect(self, c, e):
         for plugin in self.plugins:
-            plugin.on_userquit(e.source.nick)
+            pass
+            #plugin.on_userquit(e.source.nick)
 
     def on_pubmsg(self, c, e):
         if not (e.source.nick in self.config["botsettings"]["ignored"]):
