@@ -1,0 +1,18 @@
+{
+  "connection": {
+    "server": "irc.afternet.org",
+    "port": 6667,
+    "nick": "paib",
+    "channels": ["#ludumdare", "#paib", "#bottest", "#botspam"]
+  },
+
+  "botsettings": {
+    "command_prefix": "$",
+    "plugins_folder": "plugins",
+    "ignored": []
+  },
+
+  "admin": {
+    "admins": ["pta2002"]
+  }
+}
