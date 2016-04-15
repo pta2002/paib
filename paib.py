@@ -5,11 +5,14 @@ import irc.bot
 import irc.client
 import irc.strings
 
+import time
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
 class Paib(irc.bot.SingleServerIRCBot):
     def __init__(self, config):
+        self.shutupuntil = 0.0
         self.config = config
         irc.bot.SingleServerIRCBot.__init__(self, [(config["connection"]["server"], config["connection"]["port"])],
                                             config["connection"]["nick"], config["connection"]["nick"])
@@ -49,9 +52,13 @@ class Paib(irc.bot.SingleServerIRCBot):
     def on_pubmsg(self, c, e):
         if not (e.source.nick in self.config["botsettings"]["ignored"]):
             a = e.arguments[0].split(self.command_prefix, 1)
-            if len(a) > 1:
-                self.do_command(e, a[1].strip(), e.target)
-            
+            if time.time() > self.shutupuntil:
+                if len(a) > 1:
+                    if (a[1].strip() == 'quiet'):
+                        self.shutupuntil = time.time() + 60
+                        c.privmsg(e.target, "I will STFU for a while.")
+                    self.do_command(e, a[1].strip(), e.target)
+                
             for plugin in self.plugins:
                 plugin.on_message(e.arguments[0], e.source.nick, e.target)
 
