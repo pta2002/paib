@@ -13,6 +13,6 @@
   },
 
   "admin": {
-    "admins": ["pta2002"]
+    "admins": ["pta2002_", "pta2002"]
   }
 }

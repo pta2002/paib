@@ -54,7 +54,6 @@ class Paib(irc.bot.SingleServerIRCBot):
             
             for plugin in self.plugins:
                 plugin.on_message(e.arguments[0], e.source.nick, e.target)
-        print("(%s) <%s> %s" % (e.target, e.source.nick, e.arguments[0]))
 
     def do_command(self, e, cmd, chan):
         nick = e.source.nick

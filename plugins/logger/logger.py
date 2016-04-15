@@ -15,6 +15,7 @@ class Plugin(plugins.pluginapi.BasicPlugin):
 		plugins.pluginapi.BasicPlugin.__init__(self, name, desc, config, bot.connection)
 
 	def on_message(self, msg, usr, chan):
+		print("[%s] (%s) <%s> %s" % (str(int(time.time())), chan, usr, msg))
 		db = sqlite3.connect('logs.db')
 		c = db.cursor()
 		c.execute('INSERT INTO Logs(`time`, `channel`, `user`, `message`) VALUES (?, ?, ?, ?)', (int(time.time()), chan, usr, msg))

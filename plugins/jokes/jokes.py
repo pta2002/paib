@@ -21,9 +21,9 @@ class Plugin(plugins.pluginapi.BasicPlugin):
                 self.send_msg("There are no jokes! Submit one yourself!", chan)
         else:
             joke = " ".join(cmd[1:])
-            self.submit_joke(joke, usr)
+            self.submit_joke(joke, usr, chan)
 
-    def submit_joke(self, joke, usr):
+    def submit_joke(self, joke, usr, chan):
         jokesFile = open('data.json')
         jokes = json.loads(jokesFile.read())
         jokesFile.close()

@@ -19,6 +19,7 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         choice2 = random.choice(self.data["list2"]).lower()
         choice3 = random.choice(self.data["list3"]).lower()
         
+        #self.send_msg("Make a%s %s %s about Christmas!" % (self.add_n(choice1), choice1, choice2), chan)
         self.send_msg("Make a%s %s %s %s!" % (self.add_n(choice1), choice1, choice2, choice3), chan)
     
     def cmd_name(self, usr, cmd, chan):

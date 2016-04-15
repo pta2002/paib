@@ -1,4 +1,5 @@
 import plugins.pluginapi
+import time
 
 
 class Plugin(plugins.pluginapi.BasicPlugin):
@@ -9,6 +10,12 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         plugins.pluginapi.BasicPlugin.__init__(self, name, desc, config, bot.connection)
         self.register_command('reload', self.reload)
         self.register_command('help', self.help)
+        self.register_command('quiet', self.quiet)
+        self.register_command('stfu', self.quiet)
+
+    def quiet(self, usr, cmd, chan):
+        self.send_msg("I will STFU for a while", chan)
+        time.sleep(60)
 
     def reload(self, usr, cmd, chan):
         if usr in self.config["admin"]["admins"]:
