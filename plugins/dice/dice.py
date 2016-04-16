@@ -19,8 +19,8 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         try:
             if len(cmd) == 2:
                 settings = self.find_dice_notation.match(cmd[1]).groups()
-                dice_num = int(settings[0])
-                dice_faces = int(settings[1])
+                dice_num = min(int(settings[0]), 100) # Keep this bot from flooding itself off the chat
+                dice_faces = min(int(settings[1]), 100) 
             
             
             for i in range(dice_num):
