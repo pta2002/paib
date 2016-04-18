@@ -41,7 +41,7 @@ def update_db():
         # if ludum dare complains, add a delay between page queries:
         # time.sleep(0.5)
 
-    f = open('data.json', 'w')
+    f = open('entries.json', 'w')
     f.write(json.dumps({"entries": entries}, indent=4))
     print("Scrapped %s entries" % str(len(entries)))
     return entries
