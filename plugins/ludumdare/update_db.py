@@ -44,4 +44,4 @@ def update_db():
     f = open('entries.json', 'w')
     f.write(json.dumps({"entries": entries}, indent=4))
     print("Scrapped %s entries" % str(len(entries)))
-    return len(entries))
+    return len(entries)
