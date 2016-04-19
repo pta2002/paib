@@ -9,7 +9,7 @@
   "botsettings": {
     "command_prefix": "$",
     "plugins_folder": "plugins",
-    "ignored": []
+    "ignored": ["iosBot"]
   },
 
   "admin": {
