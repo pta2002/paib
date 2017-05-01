@@ -19,5 +19,5 @@ class Plugin(plugins.pluginapi.BasicPlugin):
         for g in self.ld_data['games']:
             if g['author'] == user_to_find:
                 self.send_msg("%s by %s: https://ldjam.com%s" % (g['name'], g['author'], g['path']), chan)
-                break
+                return
         self.send_msg("Couldn't find any games by " + user_to_find, chan)
